@@ -4,7 +4,7 @@ import {
   loggedInUser,
   getDataFromLocalStorage,
   revomeDataFromLocalStorage,
-  revomeAndUpdateDataFromLocalStorage
+  revomeAndUpdateDataFromLocalStorage,
 } from "../services/DataService";
 export default function DocumentList() {
   const inputRef = useRef(null);
@@ -26,8 +26,10 @@ export default function DocumentList() {
         email,
         description,
         name,
-      }
-      editDocument? revomeAndUpdateDataFromLocalStorage("documents", id, document) : setDataFromLocalStorage("documents", document );
+      };
+      editDocument
+        ? revomeAndUpdateDataFromLocalStorage("documents", id, document)
+        : setDataFromLocalStorage("documents", document);
       setDocuments(getDataFromLocalStorage("documents"));
     }
   };
@@ -35,7 +37,7 @@ export default function DocumentList() {
   const handleDelete = () => {
     revomeDataFromLocalStorage("documents", id);
     setDocuments(getDataFromLocalStorage("documents"));
-  }
+  };
 
   return (
     <>
@@ -60,8 +62,7 @@ export default function DocumentList() {
                       onClick={() => {
                         setId(index);
                         setEditDocument(item);
-                      }
-                      }
+                      }}
                       className="btn btn-link"
                       data-bs-toggle="modal"
                       data-bs-target="#uploadModal"
@@ -81,31 +82,8 @@ export default function DocumentList() {
                   </td>
                 </tr>
               ))}
-          </tbody>
-        </table>
-      </div>
-      <div className="table-responsive">
-        <h2>Shared Uploads</h2>
-        <table className="table table-striped table-border" aria-hidden="true">
-          <thead>
-            <th>Label</th>
-            <th> File Name</th>
-            <th>Shared by</th>
-          </thead>
-          <tbody>
-            <tr>
-              <td> Sales Team Attendance Sept 2023</td>
-              <td>Sale-Attend-Sept2024.xls</td>
-              <td>Textuser2@gamil.com</td>
-            </tr>
-            <tr>
-              <td> Office Rules</td>
-              <td>OfficeRule.doc</td>
-              <td>Textuser@gamil.com</td>
-            </tr>
             <tr>
               <td>
-                {" "}
                 <button
                   type="button"
                   className="btn btn-link"
@@ -188,20 +166,20 @@ export default function DocumentList() {
                     className="form-control"
                     placeholder="Enter Full name"
                     name="fileDescription"
-                    defaultValue={editDocument? editDocument.description :""}
+                    defaultValue={editDocument ? editDocument.description : ""}
                   />
                   <input
                     ref={inputRef}
                     type="file"
                     name="fileName"
                     id="fileName"
-                    defaultValue={editDocument? editDocument.name:""}
+                    defaultValue={editDocument ? editDocument.name : ""}
                   />
                 </div>
               </div>
               <div className="modal-footer">
                 <button type="submit" className="btn btn-primary">
-                 {editDocument? "Update":"Upload"} 
+                  {editDocument ? "Update" : "Upload"}
                 </button>
                 <button
                   type="button"
